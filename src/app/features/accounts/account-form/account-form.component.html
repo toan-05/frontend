@@ -1,0 +1,114 @@
+<!--
+  THEME SOURCE - đối chiếu class:
+  - crud/forms/layouts/default-forms.html -> m-portlet, m-portlet__head, m-form--fit, m-form__section--first, m-form__heading, m-portlet__foot--fit
+  - crud/forms/validation/form-controls.html -> form-group m-form__group row has-danger, col-lg-2 col-form-label, form-control m-input, form-control-feedback, m-form__help, m-form__seperator
+  - crud/forms/controls/base.html -> input type=text/password/email, m-input-icon--left la-envelope
+  Lược bỏ: confirmPassword, role (m-select2), enabled (m-bootstrap-select) -> chỉ giữ status ACTIVE/INACTIVE khớp BE Status.java:3
+-->
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{ isEdit ? 'Cập nhật tài khoản' : 'Tạo tài khoản' }} <small>crud/forms - default-forms</small></h3>
+      </div>
+    </div>
+    <div class="m-portlet__head-tools">
+      <a routerLink="/accounts" class="btn btn-secondary m-btn m-btn--custom m-btn--icon">
+        <span><i class="la la-arrow-left"></i><span>Quay lại danh sách</span></span>
+      </a>
+    </div>
+  </div>
+
+  <app-loading [loading]="loading"></app-loading>
+
+  <form *ngIf="!loading" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="m-portlet__body">
+      <div class="m-form__section m-form__section--first">
+        <div class="m-form__heading"><h3 class="m-form__heading-title">Thông tin tài khoản:</h3></div>
+
+        <div class="form-group m-form__group row" [class.has-danger]="form.controls.username.touched && form.controls.username.invalid">
+          <label class="col-form-label col-lg-2 col-sm-12">Username <span class="m--font-danger">*</span>:</label>
+          <div class="col-lg-6">
+            <input type="text" class="form-control m-input" formControlName="username" placeholder="Nhập username"
+                   [class.is-invalid]="form.controls.username.touched && form.controls.username.invalid">
+            <div *ngIf="form.controls.username.touched && form.controls.username.hasError('required')" class="form-control-feedback">Username là bắt buộc</div>
+            <div *ngIf="form.controls.username.touched && form.controls.username.hasError('minlength')" class="form-control-feedback">Tối thiểu 3 ký tự</div>
+            <span class="m-form__help" *ngIf="isEdit">Username không thể đổi khi cập nhật (BE không cho update username).</span>
+            <span class="m-form__help" *ngIf="!isEdit">Username duy nhất, không chứa khoảng trắng.</span>
+          </div>
+        </div>
+
+        <div class="form-group m-form__group row" *ngIf="!isEdit" [class.has-danger]="form.controls.password.touched && form.controls.password.invalid">
+          <label class="col-form-label col-lg-2 col-sm-12">Password <span class="m--font-danger">*</span>:</label>
+          <div class="col-lg-6">
+            <input type="password" class="form-control m-input" formControlName="password" placeholder="Nhập mật khẩu"
+                   [class.is-invalid]="form.controls.password.touched && form.controls.password.invalid">
+            <div *ngIf="form.controls.password.touched && form.controls.password.hasError('required')" class="form-control-feedback">Password là bắt buộc</div>
+            <div *ngIf="form.controls.password.touched && form.controls.password.hasError('minlength')" class="form-control-feedback">Tối thiểu 6 ký tự</div>
+          </div>
+        </div>
+
+        <div class="form-group m-form__group row">
+          <label class="col-form-label col-lg-2 col-sm-12">Full name:</label>
+          <div class="col-lg-6">
+            <input type="text" class="form-control m-input" formControlName="fullName" placeholder="Nhập họ tên">
+            <span class="m-form__help">Tên hiển thị của tài khoản.</span>
+          </div>
+        </div>
+
+        <div class="form-group m-form__group row" [class.has-danger]="form.controls.email.touched && form.controls.email.invalid">
+          <label class="col-form-label col-lg-2 col-sm-12">Email <span class="m--font-danger">*</span>:</label>
+          <div class="col-lg-6">
+            <div class="m-input-icon m-input-icon--left">
+              <input type="email" class="form-control m-input" formControlName="email" placeholder="example@domain.com"
+                     [class.is-invalid]="form.controls.email.touched && form.controls.email.invalid">
+              <span class="m-input-icon__icon m-input-icon__icon--left"><span><i class="la la-envelope"></i></span></span>
+            </div>
+            <div *ngIf="form.controls.email.touched && form.controls.email.hasError('required')" class="form-control-feedback">Email là bắt buộc</div>
+            <div *ngIf="form.controls.email.touched && form.controls.email.hasError('email')" class="form-control-feedback">Email không hợp lệ</div>
+          </div>
+        </div>
+
+        <div class="form-group m-form__group row" [class.has-danger]="form.controls.status.touched && form.controls.status.invalid">
+          <label class="col-form-label col-lg-2 col-sm-12">Status <span class="m--font-danger">*</span>:</label>
+          <div class="col-lg-6">
+            <select class="form-control m-input" formControlName="status"
+                    [class.is-invalid]="form.controls.status.touched && form.controls.status.invalid">
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="INACTIVE">INACTIVE</option>
+            </select>
+            <span class="m-form__help">ACTIVE hiển thị trong danh sách (BE filter), INACTIVE là soft-delete.</span>
+          </div>
+        </div>
+
+        <div class="form-group m-form__group row" [class.has-danger]="form.controls.role.touched && form.controls.role.invalid">
+          <label class="col-form-label col-lg-2 col-sm-12">Role <span class="m--font-danger">*</span>:</label>
+          <div class="col-lg-6">
+            <select class="form-control m-input" formControlName="role"
+                    [class.is-invalid]="form.controls.role.touched && form.controls.role.invalid">
+              <option value="USER">USER</option>
+              <option value="ADMIN">ADMIN</option>
+            </select>
+            <span class="m-form__help">Demo: chọn ADMIN/USER đều được (BE không chặn).</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="m-portlet__foot m-portlet__foot--fit">
+      <div class="m-form__actions m-form__actions--solid">
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-6">
+            <button type="submit" class="btn btn-success m-btn m-btn--air m-btn--custom" [disabled]="saving">
+              <span *ngIf="!saving"><i class="la la-save"></i> Save</span>
+              <span *ngIf="saving"><i class="fa fa-spinner fa-spin"></i> Đang lưu...</span>
+            </button>&nbsp;&nbsp;
+            <a routerLink="/accounts" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

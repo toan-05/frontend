@@ -1,0 +1,23 @@
+.m-portlet--mobile .m-portlet__head{height:auto;min-height:60px;padding:12px 25px}
+.m-portlet__nav{display:flex;align-items:center;list-style:none;margin:0;padding:0;gap:8px}
+.m-input-icon{position:relative}
+.m-input-icon--left .form-control{padding-left:36px}
+.m-input-icon__icon{position:absolute;left:0;top:0;bottom:0;width:36px;display:flex;align-items:center;justify-content:center;color:#a9a9aa}
+.m-select2{height:38px}
+.m-bootstrap-select{height:38px}
+.m--margin-bottom-30{margin-bottom:30px}.m--margin-bottom-20{margin-bottom:20px}
+.m--align-right{text-align:right}
+.m--font-primary{color:#5867dd;font-weight:500}
+.m-separator--dashed{border-top:1px dashed #ebedf2;margin:12px 0}
+.m_datatable .table th{font-weight:500;white-space:nowrap}
+.m_datatable .table td{vertical-align:middle}
+.m-btn--icon-only{width:28px;height:28px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+.btn-outline-primary{border:1px solid #5867dd;color:#5867dd;background:#fff}
+.btn-outline-primary:hover{background:#5867dd;color:#fff}
+.btn-outline-danger{border:1px solid #f4516c;color:#f4516c;background:#fff}
+.btn-outline-danger:hover{background:#f4516c;color:#fff}
+.m-datatable__pager{display:flex;align-items:center;justify-content:space-between;margin-top:18px;flex-wrap:wrap;gap:10px}
+.m-datatable__pager-detail{color:#9699a2;font-size:12px}
+.pagination .page-link{border-radius:4px;margin:0 2px;min-width:32px;text-align:center}
+.table-bordered{border:1px solid #ebedf2}
+.table-bordered th,.table-bordered td{border:1px solid #ebedf2}

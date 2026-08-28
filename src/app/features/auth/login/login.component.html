@@ -1,0 +1,33 @@
+<!-- THEME SOURCE: login-1.html:66 m-login__signin + login.js:70 - Y nguyên row/col, chỉ đổi placeholder/name -> formControlName -->
+<div class="m-login__signin">
+  <div class="m-login__head">
+    <h3 class="m-login__title">Sign In To Admin</h3>
+  </div>
+  <form class="m-login__form m-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="form-group m-form__group" [class.has-danger]="form.controls.username.touched && form.controls.username.invalid">
+      <input class="form-control m-input" type="text" placeholder="Email" name="email" autocomplete="off" formControlName="username" [class.is-invalid]="form.controls.username.touched && form.controls.username.invalid">
+      <div *ngIf="form.controls.username.touched && form.controls.username.invalid" class="form-control-feedback">Username là bắt buộc</div>
+    </div>
+    <div class="form-group m-form__group" [class.has-danger]="form.controls.password.touched && form.controls.password.invalid">
+      <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" formControlName="password" [class.is-invalid]="form.controls.password.touched && form.controls.password.invalid">
+      <div *ngIf="form.controls.password.touched && form.controls.password.invalid" class="form-control-feedback">Password là bắt buộc</div>
+    </div>
+    <div class="row m-login__form-sub">
+      <div class="col m--align-left">
+        <label class="m-checkbox m-checkbox--focus">
+          <input type="checkbox" name="remember"> Remember me
+          <span></span>
+        </label>
+      </div>
+      <div class="col m--align-right">
+        <a routerLink="/forgot-password" id="m_login_forget_password" class="m-link">Forget Password ?</a>
+      </div>
+    </div>
+    <div class="m-login__form-action">
+      <button type="submit" id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" [disabled]="loading">
+        <span *ngIf="!loading">Sign In</span>
+        <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Đang xử lý...</span>
+      </button>
+    </div>
+  </form>
+</div>

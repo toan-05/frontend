@@ -1,0 +1,23 @@
+<!-- THEME SOURCE: index.html:619 + header/profile.html:612 - m-aside-left, m-aside-menu -->
+<div id="m_aside_left" class="m-grid__item m-aside-left m-aside-left--skin-dark">
+  <!-- BEGIN: Aside Menu -->
+  <div id="m_ver_menu" class="m-aside-menu m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark" m-menu-vertical="1" m-menu-scrollable="1" m-menu-dropdown-timeout="500" style="position: relative;">
+    <ul class="m-menu__nav m-menu__nav--dropdown-submenu-arrow">
+      <li class="m-menu__section"><h4 class="m-menu__section-text">Quản trị</h4><i class="m-menu__section-icon flaticon-more-v2"></i></li>
+      <li class="m-menu__item" routerLinkActive="m-menu__item--active" aria-haspopup="true">
+        <a routerLink="/accounts" class="m-menu__link"><i class="m-menu__link-icon flaticon-users"></i><span class="m-menu__link-title"><span class="m-menu__link-wrap"><span class="m-menu__link-text">Quản lý tài khoản</span></span></span></a>
+      </li>
+      <li class="m-menu__item" routerLinkActive="m-menu__item--active" aria-haspopup="true">
+        <a routerLink="/profile" class="m-menu__link"><i class="m-menu__link-icon flaticon-profile-1"></i><span class="m-menu__link-title"><span class="m-menu__link-wrap"><span class="m-menu__link-text">My Profile</span></span></span></a>
+      </li>
+      <li class="m-menu__item" routerLinkActive="m-menu__item--active" aria-haspopup="true">
+        <a routerLink="/change-password" class="m-menu__link"><i class="m-menu__link-icon flaticon-lock"></i><span class="m-menu__link-title"><span class="m-menu__link-wrap"><span class="m-menu__link-text">Đổi mật khẩu</span></span></span></a>
+      </li>
+      <li class="m-menu__section"><h4 class="m-menu__section-text">Tài khoản</h4><i class="m-menu__section-icon flaticon-more-v2"></i></li>
+      <li class="m-menu__item" aria-haspopup="true">
+        <a href="javascript:;" class="m-menu__link" (click)="logout()"><i class="m-menu__link-icon la la-sign-out"></i><span class="m-menu__link-text">Logout</span></a>
+      </li>
+    </ul>
+  </div>
+  <!-- END: Aside Menu -->
+</div>

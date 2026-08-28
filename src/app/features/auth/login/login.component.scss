@@ -1,0 +1,9 @@
+:host{display:block}
+.m-login__head{margin-bottom:8px}
+.animated{display:block}
+/* Checkbox căn giữa, fix lệch span */
+.m-checkbox{font-size:13px;color:#6c7293;white-space:nowrap}
+.m-login__form-sub .m-link{white-space:nowrap;font-size:13px}
+.m-login__btn--primary{background:#5867dd;border-color:#5867dd;color:#fff;width:100%;transition:.2s}
+.m-login__btn--primary:hover{background:#384ad7;border-color:#384ad7}
+.m-login__btn--primary:disabled{opacity:.7;cursor:not-allowed}

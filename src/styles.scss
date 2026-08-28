@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Metronic overrides - nhập sau style.bundle.css */
+body {
+  background: #f2f3f8;
+  font-family: 'Poppins', Helvetica, sans-serif;
+}
+a { cursor: pointer; text-decoration: none; }
+.text-danger { color: #f4516c; }
+.text-right { text-align: right; }
+.btn-block { width: 100%; }
+
+/* Metronic helpers not yet in bundle */
+.m--hide { display: none !important; }
+.m--font-bold { font-weight: 500; }
+.m--align-center { text-align: center; }
+.m--marginless { margin: 0 !important; }
+.m--img-rounded { border-radius: 50%; }
+.m--img-centered { display: block; margin: 0 auto; }
+
+/* Flatten Angular wrappers để theme m-grid nhận đúng direct children (tránh sidebar lệch giữa) - theme mong body > m-page */
+app-root, app-header, app-sidebar, app-footer, app-breadcrumb, app-main-layout { display: contents; }
+
+/* Toastr global (components/base/toastr.html) */
+.toast-success { background-color: #34bfa3 !important; }
+.toast-error { background-color: #f4516c !important; }
+
+/* Select2 + bootstrap-select helpers */
+.select2-container { width: 100% !important; }
+.bootstrap-select { width: 100%; }
+
+/* Fix table responsive */
+.table-responsive { overflow-x: auto; }
+
+/* Ensure login bg images exist - fallback */
+.m-login__wrapper { backdrop-filter: none; }

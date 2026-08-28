@@ -1,0 +1,13 @@
+<app-loading [loading]="loading"></app-loading>
+<div *ngIf="account && !loading" class="m-portlet">
+  <div class="m-portlet__head"><h3>Chi tiết: {{account.username}}</h3></div>
+  <div class="m-portlet__body">
+    <p><b>Username:</b> {{account.username}}</p>
+    <p><b>Email:</b> {{account.email}}</p>
+    <p><b>FullName:</b> {{account.fullName || '-'}}</p>
+    <p><b>Status:</b> {{account.status}}</p>
+    <p><b>CreatedAt:</b> {{account.createdAt}}</p>
+    <a routerLink="/accounts" class="btn btn-secondary">Quay lại</a>
+    <a [routerLink]="['/accounts', account.id, 'edit']" class="btn btn-primary ml-2">Sửa</a>
+  </div>
+</div>

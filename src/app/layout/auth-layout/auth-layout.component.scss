@@ -1,0 +1,9 @@
+:host{display:block;min-height:100vh}
+.m-login.m-login--1{min-height:100vh;width:100%}
+/* Wrapper đã được style global, ở đây chỉ tinh chỉnh */
+.m-login__logo img{height:42px;max-width:180px;object-fit:contain}
+.m-link--light{color:#716aca}
+@media(max-width:576px){
+  :host ::ng-deep .m-login__wrapper{padding:1rem}
+  :host ::ng-deep .m-login__container{border-radius:6px}
+}

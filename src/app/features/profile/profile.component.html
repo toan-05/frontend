@@ -1,0 +1,197 @@
+<!-- THEME SOURCE: default/header/profile.html:1221 m-content - Y nguyên col-xl-3 + col-xl-9, chỉ lược bỏ phần thừa (Member Profit widget, Activity/Messages/Sales/Events giả, Quick Sidebar) và link nút chuẩn routerLink -->
+<div class="row">
+  <!-- BEGIN: Left Aside - header/profile.html:1223 m-card-profile -->
+  <div class="col-xl-3 col-lg-4">
+    <div class="m-portlet m-portlet--full-height">
+      <div class="m-portlet__body">
+        <div class="m-card-profile">
+          <div class="m-card-profile__title m--hide">Your Profile</div>
+          <div class="m-card-profile__pic">
+            <div class="m-card-profile__pic-wrapper">
+              <img src="assets/app/media/img/users/user.jpg" alt="" />
+            </div>
+          </div>
+          <div class="m-card-profile__details">
+            <span class="m-card-profile__name">{{ user?.username || 'Mark Andre' }}</span>
+            <a href="javascript:;" class="m-card-profile__email m-link">{{ user?.username || 'mark.andre@gmail.com' }}</a>
+          </div>
+        </div>
+        <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+          <li class="m-nav__separator m-nav__separator--fit"></li>
+          <li class="m-nav__section m--hide"><span class="m-nav__section-text">Section</span></li>
+          <li class="m-nav__item">
+            <a href="javascript:;" class="m-nav__link" (click)="activeTab='overview'">
+              <i class="m-nav__link-icon flaticon-profile-1"></i>
+              <span class="m-nav__link-title"><span class="m-nav__link-wrap"><span class="m-nav__link-text">My Profile</span><span class="m-nav__link-badge"><span class="m-badge m-badge--success">2</span></span></span></span>
+            </a>
+          </li>
+          <li class="m-nav__item">
+            <a routerLink="/change-password" class="m-nav__link">
+              <i class="m-nav__link-icon flaticon-lock"></i>
+              <span class="m-nav__link-text">Đổi mật khẩu</span>
+            </a>
+          </li>
+          <li class="m-nav__item">
+            <a routerLink="/accounts" class="m-nav__link">
+              <i class="m-nav__link-icon flaticon-users"></i>
+              <span class="m-nav__link-text">Quản lý tài khoản</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Lược bỏ: m-widget1 Member Profit / Orders / Issue Reports (dữ liệu giả theme) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- BEGIN: Right Content - header/profile.html:1326 m-portlet--tabs -->
+  <div class="col-xl-9 col-lg-8">
+    <div class="m-portlet m-portlet--full-height m-portlet--tabs">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-tools">
+          <ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--left m-tabs-line--primary" role="tablist">
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" [class.active]="activeTab==='overview'" href="javascript:;" (click)="activeTab='overview'" role="tab">
+                <i class="flaticon-share m--hide"></i> Overview
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" [class.active]="activeTab==='account'" href="javascript:;" (click)="activeTab='account'" role="tab">
+                Account
+              </a>
+            </li>
+            <li class="nav-item m-tabs__item">
+              <a class="nav-link m-tabs__link" [class.active]="activeTab==='settings'" href="javascript:;" (click)="activeTab='settings'" role="tab">
+                Settings
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="m-portlet__head-tools">
+          <ul class="m-portlet__nav">
+            <li class="m-portlet__nav-item m-portlet__nav-item--last">
+              <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                <a href="javascript:;" class="m-portlet__nav-link btn btn-lg btn-secondary m-btn m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                  <i class="la la-gear"></i>
+                </a>
+                <div class="m-dropdown__wrapper">
+                  <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                  <div class="m-dropdown__inner">
+                    <div class="m-dropdown__body">
+                      <div class="m-dropdown__content">
+                        <ul class="m-nav">
+                          <li class="m-nav__section m-nav__section--first"><span class="m-nav__section-text">Quick Actions</span></li>
+                          <li class="m-nav__item">
+                            <a routerLink="/change-password" class="m-nav__link">
+                              <i class="m-nav__link-icon flaticon-lock"></i><span class="m-nav__link-text">Đổi mật khẩu</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__item">
+                            <a routerLink="/forgot-password" class="m-nav__link">
+                              <i class="m-nav__link-icon flaticon-info"></i><span class="m-nav__link-text">Quên mật khẩu</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tab-content">
+        <!-- TAB 1: Overview - header/profile.html:1414 m_user_profile_tab_1 -->
+        <div class="tab-pane" [class.active]="activeTab==='overview'" id="m_user_profile_tab_1" role="tabpanel">
+          <div class="m-portlet__body">
+            <div class="form-group m-form__group m--margin-top-10 m--hide">
+              <div class="alert m-alert m-alert--default" role="alert">The example form below demonstrates common HTML form elements that receive updated styles from Bootstrap with additional classes.</div>
+            </div>
+            <div class="form-group m-form__group row">
+              <div class="col-10 ml-auto"><h3 class="m-form__section">1. Personal Details</h3></div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Username</label>
+              <div class="col-7"><input class="form-control m-input" type="text" [value]="user?.username || ''" readonly />
+                <span class="m-form__help">Username đăng nhập (không thể đổi).</span>
+              </div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Email</label>
+              <div class="col-7"><input class="form-control m-input" type="text" [value]="user?.username || ''" readonly />
+                <span class="m-form__help">Email liên kết tài khoản.</span>
+              </div>
+            </div>
+            <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+            <div class="form-group m-form__group row">
+              <div class="col-10 ml-auto"><h3 class="m-form__section">2. Actions</h3></div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Bảo mật</label>
+              <div class="col-7">
+                <a routerLink="/change-password" class="btn btn-accent m-btn m-btn--air m-btn--custom">
+                  <i class="la la-lock"></i> Đổi mật khẩu
+                </a>&nbsp;&nbsp;
+                <a routerLink="/forgot-password" class="btn btn-secondary m-btn m-btn--air m-btn--custom">
+                  <i class="la la-question"></i> Quên mật khẩu
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__foot m-portlet__foot--fit">
+            <div class="m-form__actions">
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-7">
+                  <a routerLink="/change-password" class="btn btn-accent m-btn m-btn--air m-btn--custom">Đổi mật khẩu</a>&nbsp;&nbsp;
+                  <a routerLink="/accounts" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Quản lý tài khoản</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Account info -->
+        <div class="tab-pane" [class.active]="activeTab==='account'" id="m_user_profile_tab_2" role="tabpanel">
+          <div class="m-portlet__body">
+            <div class="m-alert m-alert--outline alert alert-info" role="alert">
+              Thông tin tài khoản hiện tại: <strong>{{ user?.username }}</strong>. Để đổi mật khẩu vui lòng sang tab Settings hoặc bấm nút bên dưới.
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Username</label>
+              <div class="col-7"><input class="form-control m-input" type="text" [value]="user?.username" readonly></div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Status</label>
+              <div class="col-7"><span class="m-badge m-badge--success m-badge--wide">ACTIVE</span></div>
+            </div>
+          </div>
+          <div class="m-portlet__foot m-portlet__foot--fit">
+            <div class="m-form__actions">
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-7"><a routerLink="/change-password" class="btn btn-accent m-btn m-btn--air m-btn--custom">Đi tới đổi mật khẩu</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Settings - link to ChangePassword -->
+        <div class="tab-pane" [class.active]="activeTab==='settings'" id="m_user_profile_tab_3" role="tabpanel">
+          <div class="m-portlet__body">
+            <div class="m-alert m-alert--outline alert alert-warning" role="alert">
+              Cài đặt bảo mật - Đổi mật khẩu định kỳ để bảo vệ tài khoản.
+            </div>
+            <a routerLink="/change-password" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+              <i class="la la-lock"></i> Đổi mật khẩu ngay
+            </a>&nbsp;&nbsp;
+            <a routerLink="/reset-password" class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">
+              <i class="la la-key"></i> Đặt lại mật khẩu (có token)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

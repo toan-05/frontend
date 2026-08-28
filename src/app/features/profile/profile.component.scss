@@ -1,0 +1,10 @@
+/* THEME SOURCE: header/profile.html style.bundle.css - copy class m-card-profile, m-portlet--tabs */
+.m-card-profile { text-align: center; padding: 20px 0; }
+.m-card-profile__pic-wrapper { width: 80px; height: 80px; margin: 0 auto; border-radius: 50%; overflow: hidden; }
+.m-card-profile__pic-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.m-card-profile__details { margin-top: 10px; }
+.m-card-profile__name { font-weight: 500; font-size: 1rem; display: block; }
+.m-card-profile__email { font-size: 0.85rem; }
+.m-badge--wide { padding: 4px 10px; }
+.btn-accent { background: #5867dd; border-color: #5867dd; color: #fff; }
+.btn-accent:hover { background: #384ad7; }

@@ -1,0 +1,19 @@
+<!--
+  THEME SOURCE: components/base/sweetalert2.html + sweetalert2.js -> swal2-warning, swal2-title/content, m-portlet__foot
+  Lược bỏ: swal() JS, giữ div confirm-backdrop + m-portlet sweetalert2
+-->
+<div *ngIf="visible" class="confirm-backdrop" (click)="cancelled.emit()">
+  <div class="m-portlet confirm-dialog sweetalert2" (click)="$event.stopPropagation()">
+    <div class="swal2-icon swal2-warning swal2-icon-show" style="display:flex;">
+      <div class="swal2-icon-content">!</div>
+    </div>
+    <div class="m-portlet__body text-center">
+      <h3 class="swal2-title">{{ title }}</h3>
+      <p class="swal2-content">{{ message }}</p>
+    </div>
+    <div class="m-portlet__foot text-center" style="justify-content:center">
+      <button type="button" class="btn btn-secondary m-btn m-btn--custom" (click)="cancelled.emit()">Hủy</button>
+      <button type="button" class="btn btn-danger m-btn m-btn--custom ml-2" (click)="confirmed.emit()">Xóa</button>
+    </div>
+  </div>
+</div>
