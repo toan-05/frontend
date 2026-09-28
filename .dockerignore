@@ -2,3 +2,8 @@ node_modules
 dist
 .git
 .angular
+.github
+.vscode
+coverage
+docs
+npm-debug.log
