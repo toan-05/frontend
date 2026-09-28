@@ -1,0 +1,120 @@
+name: Frontend CI/CD
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+  push:
+    branches:
+      - dev
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: Test and Build Frontend
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    concurrency:
+      group: frontend-ci-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v7
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run unit tests
+        run: npm test -- --watch=false
+
+      - name: Build production bundle
+        run: npm run build -- --configuration production
+
+  deploy:
+    name: Deploy Frontend
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
+      - deploy-frontend
+
+    timeout-minutes: 15
+    environment: development
+
+    concurrency:
+      group: frontend-dev-deployment
+      cancel-in-progress: false
+
+    env:
+      FRONTEND_SERVICE: frontend
+      COMPOSE_PROJECT_NAME: account-manager-frontend
+
+    steps:
+      - name: Checkout exact tested commit
+        uses: actions/checkout@v7
+
+      - name: Validate deployment configuration
+        run: |
+          set -euo pipefail
+          docker compose config --quiet
+
+      - name: Build frontend image
+        run: |
+          set -euo pipefail
+          docker compose build "$FRONTEND_SERVICE"
+
+      - name: Deploy frontend
+        run: |
+          set -euo pipefail
+          docker compose up -d --no-build "$FRONTEND_SERVICE"
+          docker compose ps
+
+      - name: Verify frontend health
+        run: |
+          set -euo pipefail
+
+          container_id="$(docker compose ps -q "$FRONTEND_SERVICE")"
+          test -n "$container_id"
+
+          for attempt in $(seq 1 30); do
+            status="$(docker inspect \
+              --format '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' \
+              "$container_id")"
+
+            if [ "$status" = "healthy" ]; then
+              echo "Frontend is healthy"
+              exit 0
+            fi
+
+            if [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
+              break
+            fi
+
+            echo "Waiting for frontend health check ($attempt/30): $status"
+            sleep 2
+          done
+
+          docker compose logs --no-color --tail 100 "$FRONTEND_SERVICE"
+          exit 1
