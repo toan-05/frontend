@@ -58,7 +58,6 @@ jobs:
       - self-hosted
       - Linux
       - X64
-      - deploy-frontend
 
     timeout-minutes: 15
     environment: development
